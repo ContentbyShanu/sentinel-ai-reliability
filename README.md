@@ -386,3 +386,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE).
 ---
 
 **Sentinel is an engineering prototype for evidence-backed reliability investigation.** It is intended to help developers decide what to inspect next—not to replace production monitoring, on-call judgment, or a formal incident response process.
+
+[**Live Website Demo**](https://contentbyshanu.github.io/sentinel-ai-reliability/) · [GitHub Repository](https://github.com/ContentbyShanu/sentinel-ai-reliability)
