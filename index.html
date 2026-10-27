@@ -1,98 +1,177 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sentinel is a local-first Python application reliability investigation toolkit.">
-  <title>Sentinel — Reliability Investigator</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, Arial, sans-serif;
-      background: #0b1020;
-      color: #edf2ff;
-      line-height: 1.7;
-    }
-    .wrap { max-width: 1000px; margin: auto; padding: 28px 22px; }
-    nav { display:flex; justify-content:space-between; align-items:center; gap:16px; }
-    a { color:#86b7ff; text-decoration:none; }
-    .brand { font-size:20px; font-weight:800; letter-spacing:1px; }
-    .hero {
-      margin-top:65px; padding:48px 0;
-      border-bottom:1px solid #28334c;
-    }
-    .tag { color:#8fb8ff; font-size:13px; letter-spacing:2px; text-transform:uppercase; }
-    h1 { font-size:clamp(42px, 8vw, 76px); line-height:1.05; margin:16px 0; }
-    h2 { font-size:26px; margin-top:45px; }
-    .muted { color:#aab6cc; }
-    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
-    .btn { padding:11px 17px; border-radius:8px; border:1px solid #536684; display:inline-block; }
-    .primary { background:#dce9ff; color:#10192b; border-color:#dce9ff; font-weight:700; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
-    .card { padding:20px; background:#121a2d; border:1px solid #293650; border-radius:12px; }
-    .card h3 { margin-top:0; }
-    code { color:#a9cbff; }
-    footer { margin-top:60px; padding:24px 0; border-top:1px solid #28334c; color:#aab6cc; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sentinel is a local-first reliability investigator for application logs, errors, and latency outliers.">
+<title>Sentinel — Reliability Investigator</title>
+<style>
+:root{--bg:#0a0f18;--panel:#111a28;--line:#243247;--text:#edf3fb;--muted:#91a2b9;--blue:#8ab4ff;--cyan:#62dfd0;--red:#ff7f87;--amber:#f5c16c;--green:#7de0ad}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1c3150 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 system-ui,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:1220px;margin:auto;padding:26px 22px 50px}
+.top,.hero,.panelhead,.actions,.footer{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.top{padding-bottom:24px;border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:12px;align-items:center}
+.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#9ac3ff,#62dfd0);color:#07111c;font-weight:900;font-size:20px}
+h1,h2,h3,p{margin-top:0}
+.brand h1{font-size:19px;margin:0}
+.brand p,.small,.hint{color:var(--muted);font-size:12px;margin:2px 0 0}
+.status{border:1px solid #28614e;background:#10281f;color:var(--green);padding:7px 11px;border-radius:99px;font-size:12px}
+.hero{padding:34px 0 25px;align-items:end}
+.eyebrow{color:var(--cyan);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800}
+.hero h2{font-size:clamp(27px,4vw,42px);line-height:1.12;letter-spacing:-1px;margin:10px 0 12px;max-width:690px}
+.hero p{color:var(--muted);max-width:650px}
+.hero-actions,.inputbar,.actions .left{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#182436;color:var(--text);border-radius:10px;padding:10px 14px;font-weight:700;font-size:12px}
+.btn.primary{background:var(--blue);color:#07111c;border-color:var(--blue)}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:16px}
+.panel{border:1px solid var(--line);background:linear-gradient(160deg,#121d2c,#0f1724);border-radius:17px;padding:19px;min-width:0;margin-bottom:16px}
+.panelhead{margin-bottom:14px}
+.panelhead h3{font-size:14px;margin:0}
+.editor{width:100%;min-height:212px;resize:vertical;border:1px solid #2a3b52;background:#09111c;color:#d7e4f5;border-radius:12px;padding:14px;font:12px/1.65 monospace}
+.hint{margin:10px 0 12px}
+.actions{margin-top:12px;flex-wrap:wrap}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.metric{background:#0b1420;border:1px solid #213047;border-radius:13px;padding:15px}
+.label,.sub{font-size:11px;color:var(--muted)}
+.num{font-size:28px;font-weight:750;margin:5px 0}
+.blue{color:var(--blue)}.red{color:var(--red)}.cyan{color:var(--cyan)}.amber{color:var(--amber)}.green{color:var(--green)}
+.below{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #243247;vertical-align:top}
+th{color:var(--muted);font-size:10px;text-transform:uppercase}
+.pill{display:inline-block;padding:3px 7px;border-radius:6px;font-size:10px;font-weight:800}
+.error{background:#3a1c28;color:var(--red)}.warn{background:#392d19;color:var(--amber)}.ok{background:#123427;color:var(--green)}
+.empty{padding:20px 10px;text-align:center;color:var(--muted);font-size:12px}
+.finding{padding:12px 0;border-bottom:1px solid #243247}
+.finding strong{font-size:12px;display:block;margin-bottom:4px}
+.finding p{margin:0;color:var(--muted);font-size:11px}
+.notice{border:1px solid #34465d;background:#0c1624;color:#b8c7dc;border-radius:11px;padding:10px 12px;font-size:11px;margin-top:14px}
+.toast{color:var(--green);font-size:11px;min-height:16px;margin-top:10px}
+.footer{padding-top:20px;color:var(--muted);font-size:11px;flex-wrap:wrap}
+.footer a{color:var(--blue)}
+@media(max-width:800px){.hero{display:block}.hero-actions{margin-top:18px}.grid,.below{grid-template-columns:1fr}.wrap{padding:18px 13px}.panel{padding:15px}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <nav>
-      <a class="brand" href="#">SENTINEL</a>
-      <a href="https://github.com/ContentbyShanu/sentinel-ai-reliability">View source ↗</a>
-    </nav>
+<div class="wrap">
+<header class="top">
+  <div class="brand"><div class="mark">S</div><div><h1>Sentinel</h1><p>Application Reliability Investigator</p></div></div>
+  <div class="status">● Local demo · No API key</div>
+</header>
 
-    <header class="hero">
-      <div class="tag">Python · Open source · Local-first</div>
-      <h1>Investigate reliability.<br>With evidence.</h1>
-      <p class="muted">
-        Sentinel analyzes application events and logs to surface error patterns,
-        service-level metrics, repeated failures, and unusual latency.
-      </p>
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/ContentbyShanu/sentinel-ai-reliability">Explore the repository</a>
-        <a class="btn" href="https://github.com/ContentbyShanu/sentinel-ai-reliability/blob/main/README.md">Read documentation</a>
-      </div>
-    </header>
+<section class="hero">
+  <div><div class="eyebrow">Observability workspace</div>
+  <h2>Find the failures hiding in your logs.</h2>
+  <p>Load sample events or paste JSON/JSONL logs to inspect error rates, repeated failures, and latency outliers. Results are calculated in this browser using transparent rules.</p></div>
+  <div class="hero-actions"><button class="btn" id="sampleTop">Load sample data</button><button class="btn primary" id="analyzeTop">Analyze logs ↗</button></div>
+</section>
 
-    <section>
-      <h2>The problem</h2>
-      <p class="muted">
-        During an incident, developers need to understand which services are failing,
-        which errors repeat, and which requests are unusually slow. Sentinel organizes
-        these signals into a structured report with supporting evidence and suggested
-        investigation steps.
-      </p>
-    </section>
+<section class="grid">
+<div class="panel">
+  <div class="panelhead"><h3>01 / Log input</h3><span class="small">JSON or JSONL</span></div>
+  <div class="inputbar"><input type="file" id="fileInput" accept=".json,.jsonl,.txt,application/json,text/plain"><button class="btn" id="clearBtn">Clear</button></div>
+  <p class="hint">Expected fields: timestamp, service, level, message, status/status_code, latency_ms/latency.</p>
+  <textarea class="editor" id="logInput" spellcheck="false" placeholder="Paste JSON array or one JSON event per line..."></textarea>
+  <div class="actions"><div class="left"><button class="btn" id="sampleBtn">Use sample logs</button><button class="btn" id="downloadInput">Download sample</button></div><button class="btn primary" id="analyzeBtn">Analyze logs</button></div>
+  <div class="toast" id="toast" aria-live="polite"></div>
+  <div class="notice">Privacy: this demo processes input in your browser and does not upload logs to a server. Avoid pasting secrets or personal data into public demos.</div>
+</div>
 
-    <section>
-      <h2>Core capabilities</h2>
-      <div class="grid">
-        <article class="card"><h3>Error analysis</h3><p class="muted">Identify service error rates and HTTP 5xx failures.</p></article>
-        <article class="card"><h3>Latency insights</h3><p class="muted">Calculate p50/p95 latency and flag unusual observations.</p></article>
-        <article class="card"><h3>Repeated signatures</h3><p class="muted">Group recurring error messages to help narrow investigations.</p></article>
-        <article class="card"><h3>Evidence-backed reports</h3><p class="muted">Review findings, severity, confidence, and suggested next steps.</p></article>
-        <article class="card"><h3>Python API and CLI</h3><p class="muted">Use the command-line workflow or integrate through FastAPI.</p></article>
-        <article class="card"><h3>Local-first design</h3><p class="muted">Designed for local analysis without a paid AI API key.</p></article>
-      </div>
-    </section>
-
-    <section>
-      <h2>Built with</h2>
-      <p class="muted">Python 3.11+ · FastAPI · Pydantic · SQLite · pytest · Docker · GitHub Actions</p>
-      <h2>Try it locally</h2>
-      <p class="muted">Clone the repository and follow the README to install Sentinel and analyze the included sample events.</p>
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/ContentbyShanu/sentinel-ai-reliability">Open GitHub repository ↗</a>
-      </div>
-    </section>
-
-    <footer>
-      Sentinel · Open-source Python reliability toolkit ·
-      <a href="https://github.com/ContentbyShanu">Created by ContentbyShanu</a>
-    </footer>
+<div class="panel">
+  <div class="panelhead"><h3>02 / Service overview</h3><span class="small" id="runLabel">Waiting for analysis</span></div>
+  <div class="metrics">
+    <div class="metric"><div class="label">Total events</div><div class="num blue" id="mTotal">—</div><div class="sub">Parsed records</div></div>
+    <div class="metric"><div class="label">Failed events</div><div class="num red" id="mFailed">—</div><div class="sub" id="mFailRate">Error / failed status</div></div>
+    <div class="metric"><div class="label">HTTP 5xx</div><div class="num amber" id="m5xx">—</div><div class="sub">Server responses</div></div>
+    <div class="metric"><div class="label">p95 latency</div><div class="num cyan" id="mP95">—</div><div class="sub">Milliseconds</div></div>
   </div>
+  <div class="panelhead" style="margin-top:20px"><h3>Quick assessment</h3></div>
+  <div id="assessment" class="empty">Load logs and run analysis.</div>
+</div>
+</section>
+
+<section class="below">
+<div class="panel"><div class="panelhead"><h3>03 / Detected patterns</h3><span class="small" id="patternCount">0 findings</span></div>
+<div style="overflow:auto"><table><thead><tr><th>Pattern / signal</th><th>Count</th><th>Severity</th></tr></thead><tbody id="patternRows"><tr><td colspan="3" class="empty">No analysis yet.</td></tr></tbody></table></div></div>
+<div class="panel"><div class="panelhead"><h3>04 / Evidence & recommendations</h3><span class="small">Rule-based</span></div><div id="findings"><div class="empty">Analysis evidence will appear here.</div></div></div>
+</section>
+
+<footer class="footer"><span>Sentinel · Reliability investigation demo</span><span><a href="https://github.com/ContentbyShanu/sentinel-ai-reliability" target="_blank" rel="noopener">GitHub repository ↗</a> · <a href="https://github.com/ContentbyShanu/sentinel-ai-reliability#readme" target="_blank" rel="noopener">Documentation ↗</a></span></footer>
+</div>
+
+<script>
+const sample=[
+{service:"checkout-api",level:"INFO",status:200,latency_ms:84,message:"Checkout completed"},
+{service:"catalog-api",level:"INFO",status:200,latency_ms:112,message:"Product list returned"},
+{service:"checkout-api",level:"ERROR",status:500,latency_ms:980,message:"Database connection timeout"},
+{service:"checkout-api",level:"ERROR",status:500,latency_ms:1040,message:"Database connection timeout"},
+{service:"checkout-api",level:"ERROR",status:503,latency_ms:1300,message:"Database connection timeout"},
+{service:"payment-api",level:"WARN",status:429,latency_ms:240,message:"Payment provider rate limited"},
+{service:"catalog-api",level:"INFO",status:200,latency_ms:96,message:"Product list returned"},
+{service:"search-api",level:"ERROR",status:502,latency_ms:1650,message:"Upstream search unavailable"},
+{service:"catalog-api",level:"INFO",status:200,latency_ms:108,message:"Product list returned"},
+{service:"checkout-api",level:"ERROR",status:500,latency_ms:990,message:"Database connection timeout"},
+{service:"payment-api",level:"INFO",status:200,latency_ms:180,message:"Payment accepted"},
+{service:"search-api",level:"INFO",status:200,latency_ms:95,message:"Search completed"},
+{service:"checkout-api",level:"INFO",status:200,latency_ms:870,message:"Checkout completed"}
+];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function loadSample(){ $("logInput").value=JSON.stringify(sample,null,2);$("toast").textContent="Sample logs loaded. Click Analyze logs."; }
+function parseLogs(raw){
+ const t=raw.trim();if(!t)throw Error("Add logs or load sample data first.");
+ try{const x=JSON.parse(t);if(Array.isArray(x))return x;if(x&&Array.isArray(x.events))return x.events;if(x&&typeof x==="object")return [x];}catch{}
+ return t.split(/\r?\n/).filter(Boolean).map((line,i)=>{try{return JSON.parse(line)}catch{throw Error("Invalid JSON on line "+(i+1))}});
+}
+function val(o,keys){for(const k of keys){if(o[k]!==undefined&&o[k]!==null&&o[k]!==""&&Number.isFinite(Number(o[k])))return Number(o[k]);}return null}
+function status(o){return val(o,["status","status_code","http_status","statusCode"])}
+function latency(o){return val(o,["latency_ms","duration_ms","response_time_ms","latency","duration"])}
+function message(o){return String(o.message||o.msg||o.error||o.event||"Unspecified event").trim()}
+function quantile(a,q){if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),p=(s.length-1)*q,l=Math.floor(p),h=Math.ceil(p);return s[l]+(s[h]-s[l])*(p-l)}
+function analyze(){
+ try{
+ const logs=parseLogs($("logInput").value);
+ if(!logs.length||logs.some(o=>!o||typeof o!=="object"||Array.isArray(o)))throw Error("Each log event must be a JSON object.");
+ const failed=logs.filter(o=>{const s=status(o);return(s!==null&&s>=400)||/\b(error|fatal|critical)\b/i.test(String(o.level||o.severity||""))||o.error===true});
+ const five=logs.filter(o=>{const s=status(o);return s!==null&&s>=500});
+ const lats=logs.map(latency).filter(x=>x!==null&&x>=0);
+ const p50=quantile(lats,.5),p95=quantile(lats,.95),mad=lats.length?quantile(lats.map(x=>Math.abs(x-p50)),.5):null;
+ const outliers=mad===null?[]:logs.filter(o=>{const l=latency(o);return l!==null&&l>p50+Math.max(3*1.4826*mad,p50*.5,100)});
+ const groups={};failed.forEach(o=>{const k=message(o).replace(/\b\d+\b/g,"#").slice(0,100);groups[k]=(groups[k]||0)+1});
+ const repeats=Object.entries(groups).filter(([,n])=>n>1).sort((a,b)=>b[1]-a[1]);
+ $("mTotal").textContent=logs.length;$("mFailed").textContent=failed.length;$("mFailRate").textContent=(failed.length/logs.length*100).toFixed(1)+"% of events flagged";
+ $("m5xx").textContent=five.length;$("mP95").textContent=p95===null?"N/A":Math.round(p95)+" ms";$("runLabel").textContent="Analyzed just now";
+ const signals=repeats.length+outliers.length+(five.length?1:0);$("patternCount").textContent=signals+" signals";
+ let assess=[];
+ assess.push(failed.length?`<div class="finding"><strong><span class="pill ${failed.length/logs.length>=.1?"error":"warn"}">${failed.length/logs.length>=.1?"HIGH":"REVIEW"}</span> ${failed.length} of ${logs.length} events flagged</strong><p>Based on HTTP status and error-level fields. This is a heuristic, not a diagnosis.</p></div>`:'<div class="finding"><strong><span class="pill ok">CLEAR</span> No obvious failed events</strong><p>No HTTP error statuses or error-level events detected.</p></div>');
+ if(outliers.length)assess.push(`<div class="finding"><strong><span class="pill warn">LATENCY</span> ${outliers.length} possible latency outliers</strong><p>Compared against median latency with a robust threshold.</p></div>`);
+ $("assessment").innerHTML=assess.join("");
+ let rows=[];
+ if(five.length)rows.push(`<tr><td>HTTP 5xx responses</td><td>${five.length}</td><td><span class="pill error">HIGH</span></td></tr>`);
+ repeats.slice(0,5).forEach(([k,n])=>rows.push(`<tr><td>${esc(k)}</td><td>${n}</td><td><span class="pill error">REPEATED</span></td></tr>`));
+ if(outliers.length)rows.push(`<tr><td>Latency outliers</td><td>${outliers.length}</td><td><span class="pill warn">REVIEW</span></td></tr>`);
+ if(!rows.length)rows.push('<tr><td colspan="3" class="empty">No patterns flagged.</td></tr>');
+ $("patternRows").innerHTML=rows.join("");
+ let findings=[];
+ if(five.length)findings.push(`<div class="finding"><strong><span class="pill error">HTTP 5xx</span> Inspect server-side failures</strong><p>${five.length} event(s) returned 5xx. Check dependency timeouts, service health, and upstream availability.</p></div>`);
+ if(repeats.length)findings.push(`<div class="finding"><strong><span class="pill error">REPEATED</span> Recurring error signature</strong><p>Most repeated signature: “${esc(repeats[0][0])}” (${repeats[0][1]} occurrences).</p></div>`);
+ if(outliers.length)findings.push(`<div class="finding"><strong><span class="pill warn">LATENCY</span> Slow events worth inspecting</strong><p>${outliers.length} event(s) exceed the demo threshold.</p></div>`);
+ if(lats.length)findings.push(`<div class="finding"><strong><span class="pill ok">METRICS</span> Latency distribution</strong><p>Median p50: ${Math.round(p50)} ms; p95: ${Math.round(p95)} ms from ${lats.length} latency values.</p></div>`);
+ if(!findings.length)findings.push('<div class="finding"><strong>No findings generated</strong><p>Try sample logs or include status and latency fields.</p></div>');
+ $("findings").innerHTML=findings.join("");$("toast").textContent=`Analysis complete: ${logs.length} events processed in your browser.`;
+ }catch(e){$("toast").textContent=e.message}
+}
+$("sampleBtn").onclick=loadSample;$("sampleTop").onclick=loadSample;
+$("analyzeBtn").onclick=analyze;$("analyzeTop").onclick=()=>{document.querySelector(".grid").scrollIntoView({behavior:"smooth"});analyze()};
+$("clearBtn").onclick=()=>{$("logInput").value="";$("toast").textContent="Input cleared."};
+$("fileInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{$("logInput").value=await f.text();$("toast").textContent=`Loaded ${f.name}. Click Analyze logs.`}catch{$("toast").textContent="Could not read selected file."}});
+$("downloadInput").onclick=()=>{const blob=new Blob([JSON.stringify(sample,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="sentinel-sample-logs.json";a.click();URL.revokeObjectURL(a.href)};
+loadSample();analyze();
+</script>
 </body>
 </html>
