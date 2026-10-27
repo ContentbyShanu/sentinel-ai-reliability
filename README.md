@@ -1,4 +1,4 @@
-<div align="center">
+ <div align="center">
 
 # Sentinel
 
@@ -14,6 +14,21 @@
 </div>
 
 ---
+
+## Live browser demo
+
+**[Open Sentinel Live Dashboard](https://contentbyshanu.github.io/sentinel-ai-reliability/)** · [GitHub repository](https://github.com/ContentbyShanu/sentinel-ai-reliability)
+
+The static GitHub Pages dashboard includes two browser-side tools:
+
+- **Log analyzer:** load sample data or select a JSON/JSONL/TXT file to inspect event counts, HTTP failures, repeated message signatures, and latency percentiles/outlier candidates.
+- **Source-code pattern scanner:** paste or select source files to flag configured patterns such as possible hardcoded secrets, `eval()`, unsafe HTML insertion, broad exception handlers, TLS-verification disabling, `TODO`/`FIXME`, and placeholder implementations. It displays line numbers, snippets, severity labels, and suggested review steps; a JSON scan report can be downloaded.
+
+**Important limitations:** the browser scanner is a heuristic pattern matcher, not a full static-analysis engine. Matches may be false positives, and no matches do not prove code is bug-free. It does not execute uploaded code, run the Python test suite, or automatically inspect the entire GitHub repository. Browser-side dashboard calculations are separate from the Python/FastAPI backend; GitHub Pages hosts only the static frontend and does not run the Python API. The dashboard processes selected/pasted data in the browser and does not send it to a server. Avoid using production secrets or sensitive logs in a public demo.
+
+### Updating the live dashboard
+
+The website is published from the repository root via GitHub Pages. Commit the root-level `index.html` to update the dashboard. Keep the Python source, tests, examples, and project configuration files intact.
 
 ## Overview
 
@@ -315,6 +330,7 @@ GitHub Actions runs linting and tests against Python 3.11 and 3.12 for pushes an
 ```text
 sentinel-ai-reliability/
 ├── .github/workflows/ci.yml
+├── index.html
 ├── examples/
 │   ├── README.md
 │   └── sample_events.jsonl
@@ -386,5 +402,3 @@ Distributed under the MIT License. See [LICENSE](LICENSE).
 ---
 
 **Sentinel is an engineering prototype for evidence-backed reliability investigation.** It is intended to help developers decide what to inspect next—not to replace production monitoring, on-call judgment, or a formal incident response process.
-
-[**Live Website Demo**](https://contentbyshanu.github.io/sentinel-ai-reliability/) · [GitHub Repository](https://github.com/ContentbyShanu/sentinel-ai-reliability)
