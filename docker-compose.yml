@@ -1,0 +1,13 @@
+services:
+  sentinel:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      SENTINEL_DB_PATH: /data/sentinel.db
+    volumes:
+      - sentinel-data:/data
+    restart: unless-stopped
+
+volumes:
+  sentinel-data:
