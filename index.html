@@ -1,177 +1,211 @@
-
+ 
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Sentinel is a local-first reliability investigator for application logs, errors, and latency outliers.">
+<meta name="description" content="Sentinel application reliability investigator and code scanner">
 <title>Sentinel — Reliability Investigator</title>
 <style>
 :root{--bg:#0a0f18;--panel:#111a28;--line:#243247;--text:#edf3fb;--muted:#91a2b9;--blue:#8ab4ff;--cyan:#62dfd0;--red:#ff7f87;--amber:#f5c16c;--green:#7de0ad}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1c3150 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 system-ui,sans-serif}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.wrap{max-width:1220px;margin:auto;padding:26px 22px 50px}
-.top,.hero,.panelhead,.actions,.footer{display:flex;justify-content:space-between;gap:14px;align-items:center}
-.top{padding-bottom:24px;border-bottom:1px solid var(--line)}
-.brand{display:flex;gap:12px;align-items:center}
-.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#9ac3ff,#62dfd0);color:#07111c;font-weight:900;font-size:20px}
-h1,h2,h3,p{margin-top:0}
-.brand h1{font-size:19px;margin:0}
-.brand p,.small,.hint{color:var(--muted);font-size:12px;margin:2px 0 0}
-.status{border:1px solid #28614e;background:#10281f;color:var(--green);padding:7px 11px;border-radius:99px;font-size:12px}
-.hero{padding:34px 0 25px;align-items:end}
-.eyebrow{color:var(--cyan);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800}
-.hero h2{font-size:clamp(27px,4vw,42px);line-height:1.12;letter-spacing:-1px;margin:10px 0 12px;max-width:690px}
-.hero p{color:var(--muted);max-width:650px}
-.hero-actions,.inputbar,.actions .left{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:#182436;color:var(--text);border-radius:10px;padding:10px 14px;font-weight:700;font-size:12px}
-.btn.primary{background:var(--blue);color:#07111c;border-color:var(--blue)}
-.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:16px}
-.panel{border:1px solid var(--line);background:linear-gradient(160deg,#121d2c,#0f1724);border-radius:17px;padding:19px;min-width:0;margin-bottom:16px}
-.panelhead{margin-bottom:14px}
-.panelhead h3{font-size:14px;margin:0}
-.editor{width:100%;min-height:212px;resize:vertical;border:1px solid #2a3b52;background:#09111c;color:#d7e4f5;border-radius:12px;padding:14px;font:12px/1.65 monospace}
-.hint{margin:10px 0 12px}
-.actions{margin-top:12px;flex-wrap:wrap}
-.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.metric{background:#0b1420;border:1px solid #213047;border-radius:13px;padding:15px}
-.label,.sub{font-size:11px;color:var(--muted)}
-.num{font-size:28px;font-weight:750;margin:5px 0}
-.blue{color:var(--blue)}.red{color:var(--red)}.cyan{color:var(--cyan)}.amber{color:var(--amber)}.green{color:var(--green)}
-.below{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #243247;vertical-align:top}
-th{color:var(--muted);font-size:10px;text-transform:uppercase}
-.pill{display:inline-block;padding:3px 7px;border-radius:6px;font-size:10px;font-weight:800}
-.error{background:#3a1c28;color:var(--red)}.warn{background:#392d19;color:var(--amber)}.ok{background:#123427;color:var(--green)}
-.empty{padding:20px 10px;text-align:center;color:var(--muted);font-size:12px}
-.finding{padding:12px 0;border-bottom:1px solid #243247}
-.finding strong{font-size:12px;display:block;margin-bottom:4px}
-.finding p{margin:0;color:var(--muted);font-size:11px}
-.notice{border:1px solid #34465d;background:#0c1624;color:#b8c7dc;border-radius:11px;padding:10px 12px;font-size:11px;margin-top:14px}
-.toast{color:var(--green);font-size:11px;min-height:16px;margin-top:10px}
-.footer{padding-top:20px;color:var(--muted);font-size:11px;flex-wrap:wrap}
-.footer a{color:var(--blue)}
-@media(max-width:800px){.hero{display:block}.hero-actions{margin-top:18px}.grid,.below{grid-template-columns:1fr}.wrap{padding:18px 13px}.panel{padding:15px}}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#1c3150,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1200px;margin:auto;padding:24px 18px 45px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,var(--blue),var(--cyan));color:#08111c;font-size:21px;font-weight:900}
+h1,h2,h3,p{margin-top:0}.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;color:var(--muted);margin:2px 0 0}
+.status{border:1px solid #28614e;background:#10281f;color:var(--green);padding:7px 10px;border-radius:99px;font-size:11px}
+.hero{padding:32px 0 24px}.eyebrow{color:var(--cyan);font-size:11px;text-transform:uppercase;letter-spacing:1.6px;font-weight:800}
+.hero h2{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-1px;margin:9px 0}.hero p{color:var(--muted);max-width:680px}
+.panel{background:linear-gradient(150deg,#121d2c,#0f1724);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}.below{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panelhead h3{font-size:14px;margin:0}.small,.hint{font-size:11px;color:var(--muted)}
+.btn{border:1px solid var(--line);background:#182436;color:var(--text);border-radius:9px;padding:9px 12px;font-size:12px;font-weight:700}.btn.primary{background:var(--blue);border-color:var(--blue);color:#07111c}
+.btn:hover{filter:brightness(1.08)}.editor{width:100%;min-height:220px;resize:vertical;border:1px solid #2a3b52;background:#09111c;color:#d7e4f5;border-radius:11px;padding:13px;font:12px/1.65 ui-monospace,Consolas,monospace;outline:none}.editor:focus{border-color:var(--blue)}
+.actions,.filebar{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap;margin-top:11px}.filebar{justify-content:flex-start}.filebar input{max-width:100%;font-size:11px;color:var(--muted)}.hint{margin:9px 0 12px}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{background:#0b1420;border:1px solid #213047;border-radius:12px;padding:14px}.label{font-size:11px;color:var(--muted)}.num{font-size:27px;font-weight:800;letter-spacing:-.7px;margin-top:4px}.sub{font-size:10px;color:var(--muted)}
+.red{color:var(--red)}.blue{color:var(--blue)}.cyan{color:var(--cyan)}.amber{color:var(--amber)}.green{color:var(--green)}
+.notice{border:1px solid #34465d;background:#0c1624;color:#b8c7dc;border-radius:10px;padding:10px;margin-top:14px;font-size:11px}
+.empty{padding:22px 10px;text-align:center;color:var(--muted);font-size:12px}.finding{padding:12px 0;border-bottom:1px solid #1d2a3c}.finding:last-child{border-bottom:0}.finding strong{font-size:12px;display:block;margin-bottom:5px}.finding p{margin:0;color:var(--muted);font-size:11px;overflow-wrap:anywhere}
+.pill{display:inline-block;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:800}.error{background:#3a1c28;color:var(--red)}.warn{background:#392d19;color:var(--amber)}.ok{background:#123427;color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 7px;border-bottom:1px solid #213047;vertical-align:top}th{font-size:10px;color:var(--muted);text-transform:uppercase}td{overflow-wrap:anywhere}
+.toast{font-size:11px;color:var(--green);margin-top:8px;min-height:16px}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:11px;padding-top:22px}.footer a{color:var(--blue);text-decoration:none}
+@media(max-width:760px){.grid,.below{grid-template-columns:1fr}.wrap{padding:16px 12px 30px}.panel{padding:14px}.hero h2{font-size:32px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
-  <div class="brand"><div class="mark">S</div><div><h1>Sentinel</h1><p>Application Reliability Investigator</p></div></div>
-  <div class="status">● Local demo · No API key</div>
+<div class="brand"><div class="mark">S</div><div><h1>Sentinel</h1><p>Application Reliability Investigator</p></div></div>
+<div class="status">● Local demo · No API key</div>
 </header>
 
 <section class="hero">
-  <div><div class="eyebrow">Observability workspace</div>
-  <h2>Find the failures hiding in your logs.</h2>
-  <p>Load sample events or paste JSON/JSONL logs to inspect error rates, repeated failures, and latency outliers. Results are calculated in this browser using transparent rules.</p></div>
-  <div class="hero-actions"><button class="btn" id="sampleTop">Load sample data</button><button class="btn primary" id="analyzeTop">Analyze logs ↗</button></div>
+<div class="eyebrow">Observability workspace</div>
+<h2>Find the failures hiding in your logs.</h2>
+<p>Analyze application logs, identify recurring errors and latency outliers, and scan source code for common risky patterns. Everything runs locally in your browser.</p>
+<div class="actions" style="justify-content:flex-start">
+<button class="btn" id="sampleTop">Load sample data</button>
+<button class="btn primary" id="analyzeTop">Analyze logs</button>
+</div>
 </section>
 
 <section class="grid">
 <div class="panel">
-  <div class="panelhead"><h3>01 / Log input</h3><span class="small">JSON or JSONL</span></div>
-  <div class="inputbar"><input type="file" id="fileInput" accept=".json,.jsonl,.txt,application/json,text/plain"><button class="btn" id="clearBtn">Clear</button></div>
-  <p class="hint">Expected fields: timestamp, service, level, message, status/status_code, latency_ms/latency.</p>
-  <textarea class="editor" id="logInput" spellcheck="false" placeholder="Paste JSON array or one JSON event per line..."></textarea>
-  <div class="actions"><div class="left"><button class="btn" id="sampleBtn">Use sample logs</button><button class="btn" id="downloadInput">Download sample</button></div><button class="btn primary" id="analyzeBtn">Analyze logs</button></div>
-  <div class="toast" id="toast" aria-live="polite"></div>
-  <div class="notice">Privacy: this demo processes input in your browser and does not upload logs to a server. Avoid pasting secrets or personal data into public demos.</div>
+<div class="panelhead"><h3>01 / Log input</h3><span class="small">JSON / JSONL</span></div>
+<div class="filebar"><input type="file" id="logFile" accept=".json,.jsonl,.txt"><button class="btn" id="clearLogs">Clear</button></div>
+<p class="hint">Supported fields include message, level, service, status and latency_ms.</p>
+<textarea id="logInput" class="editor" spellcheck="false" aria-label="Log input" placeholder="Paste a JSON array or one JSON event per line"></textarea>
+<div class="actions"><button class="btn" id="sampleBtn">Use sample logs</button><button class="btn" id="downloadSample">Download sample</button><button class="btn primary" id="analyzeBtn">Analyze logs</button></div>
+<div class="toast" id="logToast" aria-live="polite"></div>
+<div class="notice">Privacy: the demo processes your input in this browser. It does not upload logs to a server. Avoid including passwords, tokens or personal data.</div>
 </div>
 
 <div class="panel">
-  <div class="panelhead"><h3>02 / Service overview</h3><span class="small" id="runLabel">Waiting for analysis</span></div>
-  <div class="metrics">
-    <div class="metric"><div class="label">Total events</div><div class="num blue" id="mTotal">—</div><div class="sub">Parsed records</div></div>
-    <div class="metric"><div class="label">Failed events</div><div class="num red" id="mFailed">—</div><div class="sub" id="mFailRate">Error / failed status</div></div>
-    <div class="metric"><div class="label">HTTP 5xx</div><div class="num amber" id="m5xx">—</div><div class="sub">Server responses</div></div>
-    <div class="metric"><div class="label">p95 latency</div><div class="num cyan" id="mP95">—</div><div class="sub">Milliseconds</div></div>
-  </div>
-  <div class="panelhead" style="margin-top:20px"><h3>Quick assessment</h3></div>
-  <div id="assessment" class="empty">Load logs and run analysis.</div>
+<div class="panelhead"><h3>02 / Service overview</h3><span class="small" id="runLabel">Waiting</span></div>
+<div class="metrics">
+<div class="metric"><div class="label">Total events</div><div class="num blue" id="total">—</div><div class="sub">Parsed records</div></div>
+<div class="metric"><div class="label">Failed events</div><div class="num red" id="failed">—</div><div class="sub" id="failRate">Error signals</div></div>
+<div class="metric"><div class="label">HTTP 5xx</div><div class="num amber" id="fivexx">—</div><div class="sub">Server errors</div></div>
+<div class="metric"><div class="label">p95 latency</div><div class="num cyan" id="p95">—</div><div class="sub">Milliseconds</div></div>
+</div>
+<div class="panelhead" style="margin-top:20px"><h3>Quick assessment</h3></div>
+<div id="assessment" class="empty">Analyze logs to see an assessment.</div>
 </div>
 </section>
 
 <section class="below">
-<div class="panel"><div class="panelhead"><h3>03 / Detected patterns</h3><span class="small" id="patternCount">0 findings</span></div>
-<div style="overflow:auto"><table><thead><tr><th>Pattern / signal</th><th>Count</th><th>Severity</th></tr></thead><tbody id="patternRows"><tr><td colspan="3" class="empty">No analysis yet.</td></tr></tbody></table></div></div>
-<div class="panel"><div class="panelhead"><h3>04 / Evidence & recommendations</h3><span class="small">Rule-based</span></div><div id="findings"><div class="empty">Analysis evidence will appear here.</div></div></div>
+<div class="panel"><div class="panelhead"><h3>03 / Detected patterns</h3><span class="small" id="patternCount">0 signals</span></div>
+<div style="overflow:auto"><table><thead><tr><th>Pattern</th><th>Count</th><th>Severity</th></tr></thead><tbody id="patterns"><tr><td colspan="3">No analysis yet.</td></tr></tbody></table></div></div>
+<div class="panel"><div class="panelhead"><h3>04 / Evidence & recommendations</h3><span class="small">Rule-based</span></div><div id="recommendations"><div class="empty">Findings will appear here.</div></div></div>
 </section>
 
-<footer class="footer"><span>Sentinel · Reliability investigation demo</span><span><a href="https://github.com/ContentbyShanu/sentinel-ai-reliability" target="_blank" rel="noopener">GitHub repository ↗</a> · <a href="https://github.com/ContentbyShanu/sentinel-ai-reliability#readme" target="_blank" rel="noopener">Documentation ↗</a></span></footer>
+<section class="panel" style="margin-top:15px">
+<div class="panelhead"><h3>05 / Bug & Code Scanner</h3><span class="small">Heuristic checks</span></div>
+<p class="hint">Paste or upload source code. Sentinel checks for potential hardcoded secrets, dynamic evaluation, unsafe HTML insertion, broad exception handling and unfinished markers. Findings need manual review.</p>
+<div class="filebar"><input type="file" id="sourceFile" accept=".py,.js,.jsx,.ts,.tsx,.html,.css,.java,.go,.php,.rb,.txt"><button class="btn" id="clearSource">Clear code</button><button class="btn primary" id="scanCode">Scan for bugs</button></div>
+<textarea id="sourceInput" class="editor" style="margin-top:12px;min-height:190px" spellcheck="false" aria-label="Source code" placeholder="Paste source code here..."></textarea>
+<div class="metrics" style="margin-top:12px;grid-template-columns:repeat(3,minmax(0,1fr))">
+<div class="metric"><div class="label">High-risk hints</div><div class="num red" id="highCount">0</div></div>
+<div class="metric"><div class="label">Review warnings</div><div class="num amber" id="mediumCount">0</div></div>
+<div class="metric"><div class="label">TODO markers</div><div class="num cyan" id="lowCount">0</div></div>
+</div>
+<div id="codeResults" style="margin-top:10px"><div class="empty">Paste code and run the scanner.</div></div>
+<div class="actions"><span class="small">Browser-only · Does not execute code</span><button class="btn" id="downloadReport">Download scan report</button></div>
+<div class="toast" id="codeToast" aria-live="polite"></div>
+</section>
+
+<footer class="footer"><span>Sentinel · Reliability investigation demo</span><span><a href="https://github.com/ContentbyShanu/sentinel-ai-reliability" target="_blank" rel="noopener">GitHub repository ↗</a></span></footer>
 </div>
 
 <script>
-const sample=[
-{service:"checkout-api",level:"INFO",status:200,latency_ms:84,message:"Checkout completed"},
-{service:"catalog-api",level:"INFO",status:200,latency_ms:112,message:"Product list returned"},
-{service:"checkout-api",level:"ERROR",status:500,latency_ms:980,message:"Database connection timeout"},
-{service:"checkout-api",level:"ERROR",status:500,latency_ms:1040,message:"Database connection timeout"},
-{service:"checkout-api",level:"ERROR",status:503,latency_ms:1300,message:"Database connection timeout"},
-{service:"payment-api",level:"WARN",status:429,latency_ms:240,message:"Payment provider rate limited"},
-{service:"catalog-api",level:"INFO",status:200,latency_ms:96,message:"Product list returned"},
-{service:"search-api",level:"ERROR",status:502,latency_ms:1650,message:"Upstream search unavailable"},
-{service:"catalog-api",level:"INFO",status:200,latency_ms:108,message:"Product list returned"},
-{service:"checkout-api",level:"ERROR",status:500,latency_ms:990,message:"Database connection timeout"},
-{service:"payment-api",level:"INFO",status:200,latency_ms:180,message:"Payment accepted"},
-{service:"search-api",level:"INFO",status:200,latency_ms:95,message:"Search completed"},
-{service:"checkout-api",level:"INFO",status:200,latency_ms:870,message:"Checkout completed"}
-];
 const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function loadSample(){ $("logInput").value=JSON.stringify(sample,null,2);$("toast").textContent="Sample logs loaded. Click Analyze logs."; }
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sample=[
+{timestamp:"2026-10-27T09:00:01Z",service:"checkout-api",level:"INFO",status:200,latency_ms:84,message:"Checkout completed"},
+{timestamp:"2026-10-27T09:00:03Z",service:"catalog-api",level:"INFO",status:200,latency_ms:112,message:"Product list returned"},
+{timestamp:"2026-10-27T09:00:05Z",service:"checkout-api",level:"ERROR",status:500,latency_ms:980,message:"Database connection timeout"},
+{timestamp:"2026-10-27T09:00:06Z",service:"checkout-api",level:"ERROR",status:500,latency_ms:1040,message:"Database connection timeout"},
+{timestamp:"2026-10-27T09:00:07Z",service:"checkout-api",level:"ERROR",status:503,latency_ms:1300,message:"Database connection timeout"},
+{timestamp:"2026-10-27T09:00:08Z",service:"payment-api",level:"WARN",status:429,latency_ms:240,message:"Payment provider rate limited"},
+{timestamp:"2026-10-27T09:00:09Z",service:"catalog-api",level:"INFO",status:200,latency_ms:96,message:"Product list returned"},
+{timestamp:"2026-10-27T09:00:10Z",service:"search-api",level:"ERROR",status:502,latency_ms:1650,message:"Upstream search unavailable"},
+{timestamp:"2026-10-27T09:00:11Z",service:"catalog-api",level:"INFO",status:200,latency_ms:108,message:"Product list returned"},
+{timestamp:"2026-10-27T09:00:12Z",service:"checkout-api",level:"ERROR",status:500,latency_ms:990,message:"Database connection timeout"},
+{timestamp:"2026-10-27T09:00:13Z",service:"payment-api",level:"INFO",status:200,latency_ms:180,message:"Payment accepted"},
+{timestamp:"2026-10-27T09:00:14Z",service:"search-api",level:"INFO",status:200,latency_ms:95,message:"Search completed"},
+{timestamp:"2026-10-27T09:00:15Z",service:"checkout-api",level:"INFO",status:200,latency_ms:870,message:"Checkout completed"}
+];
+
+function loadSample(){ $('logInput').value=JSON.stringify(sample,null,2);$('logToast').textContent='Sample logs loaded.';}
 function parseLogs(raw){
- const t=raw.trim();if(!t)throw Error("Add logs or load sample data first.");
- try{const x=JSON.parse(t);if(Array.isArray(x))return x;if(x&&Array.isArray(x.events))return x.events;if(x&&typeof x==="object")return [x];}catch{}
- return t.split(/\r?\n/).filter(Boolean).map((line,i)=>{try{return JSON.parse(line)}catch{throw Error("Invalid JSON on line "+(i+1))}});
+if(!raw.trim())throw Error('Paste logs or load the sample first.');
+try{const x=JSON.parse(raw);if(Array.isArray(x))return x;if(x&&Array.isArray(x.events))return x.events;if(x&&typeof x==='object')return[x];}catch(e){}
+return raw.split(/\r?\n/).filter(x=>x.trim()).map((line,i)=>{try{return JSON.parse(line)}catch(e){throw Error('Invalid JSON on line '+(i+1))}});
 }
-function val(o,keys){for(const k of keys){if(o[k]!==undefined&&o[k]!==null&&o[k]!==""&&Number.isFinite(Number(o[k])))return Number(o[k]);}return null}
-function status(o){return val(o,["status","status_code","http_status","statusCode"])}
-function latency(o){return val(o,["latency_ms","duration_ms","response_time_ms","latency","duration"])}
-function message(o){return String(o.message||o.msg||o.error||o.event||"Unspecified event").trim()}
-function quantile(a,q){if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),p=(s.length-1)*q,l=Math.floor(p),h=Math.ceil(p);return s[l]+(s[h]-s[l])*(p-l)}
-function analyze(){
- try{
- const logs=parseLogs($("logInput").value);
- if(!logs.length||logs.some(o=>!o||typeof o!=="object"||Array.isArray(o)))throw Error("Each log event must be a JSON object.");
- const failed=logs.filter(o=>{const s=status(o);return(s!==null&&s>=400)||/\b(error|fatal|critical)\b/i.test(String(o.level||o.severity||""))||o.error===true});
- const five=logs.filter(o=>{const s=status(o);return s!==null&&s>=500});
- const lats=logs.map(latency).filter(x=>x!==null&&x>=0);
- const p50=quantile(lats,.5),p95=quantile(lats,.95),mad=lats.length?quantile(lats.map(x=>Math.abs(x-p50)),.5):null;
- const outliers=mad===null?[]:logs.filter(o=>{const l=latency(o);return l!==null&&l>p50+Math.max(3*1.4826*mad,p50*.5,100)});
- const groups={};failed.forEach(o=>{const k=message(o).replace(/\b\d+\b/g,"#").slice(0,100);groups[k]=(groups[k]||0)+1});
- const repeats=Object.entries(groups).filter(([,n])=>n>1).sort((a,b)=>b[1]-a[1]);
- $("mTotal").textContent=logs.length;$("mFailed").textContent=failed.length;$("mFailRate").textContent=(failed.length/logs.length*100).toFixed(1)+"% of events flagged";
- $("m5xx").textContent=five.length;$("mP95").textContent=p95===null?"N/A":Math.round(p95)+" ms";$("runLabel").textContent="Analyzed just now";
- const signals=repeats.length+outliers.length+(five.length?1:0);$("patternCount").textContent=signals+" signals";
- let assess=[];
- assess.push(failed.length?`<div class="finding"><strong><span class="pill ${failed.length/logs.length>=.1?"error":"warn"}">${failed.length/logs.length>=.1?"HIGH":"REVIEW"}</span> ${failed.length} of ${logs.length} events flagged</strong><p>Based on HTTP status and error-level fields. This is a heuristic, not a diagnosis.</p></div>`:'<div class="finding"><strong><span class="pill ok">CLEAR</span> No obvious failed events</strong><p>No HTTP error statuses or error-level events detected.</p></div>');
- if(outliers.length)assess.push(`<div class="finding"><strong><span class="pill warn">LATENCY</span> ${outliers.length} possible latency outliers</strong><p>Compared against median latency with a robust threshold.</p></div>`);
- $("assessment").innerHTML=assess.join("");
- let rows=[];
- if(five.length)rows.push(`<tr><td>HTTP 5xx responses</td><td>${five.length}</td><td><span class="pill error">HIGH</span></td></tr>`);
- repeats.slice(0,5).forEach(([k,n])=>rows.push(`<tr><td>${esc(k)}</td><td>${n}</td><td><span class="pill error">REPEATED</span></td></tr>`));
- if(outliers.length)rows.push(`<tr><td>Latency outliers</td><td>${outliers.length}</td><td><span class="pill warn">REVIEW</span></td></tr>`);
- if(!rows.length)rows.push('<tr><td colspan="3" class="empty">No patterns flagged.</td></tr>');
- $("patternRows").innerHTML=rows.join("");
- let findings=[];
- if(five.length)findings.push(`<div class="finding"><strong><span class="pill error">HTTP 5xx</span> Inspect server-side failures</strong><p>${five.length} event(s) returned 5xx. Check dependency timeouts, service health, and upstream availability.</p></div>`);
- if(repeats.length)findings.push(`<div class="finding"><strong><span class="pill error">REPEATED</span> Recurring error signature</strong><p>Most repeated signature: “${esc(repeats[0][0])}” (${repeats[0][1]} occurrences).</p></div>`);
- if(outliers.length)findings.push(`<div class="finding"><strong><span class="pill warn">LATENCY</span> Slow events worth inspecting</strong><p>${outliers.length} event(s) exceed the demo threshold.</p></div>`);
- if(lats.length)findings.push(`<div class="finding"><strong><span class="pill ok">METRICS</span> Latency distribution</strong><p>Median p50: ${Math.round(p50)} ms; p95: ${Math.round(p95)} ms from ${lats.length} latency values.</p></div>`);
- if(!findings.length)findings.push('<div class="finding"><strong>No findings generated</strong><p>Try sample logs or include status and latency fields.</p></div>');
- $("findings").innerHTML=findings.join("");$("toast").textContent=`Analysis complete: ${logs.length} events processed in your browser.`;
- }catch(e){$("toast").textContent=e.message}
+function num(o,keys){for(const k of keys){if(o[k]!==undefined&&o[k]!==null&&o[k]!==''&&Number.isFinite(Number(o[k])))return Number(o[k]);}return null;}
+function status(o){return num(o,['status','status_code','http_status','statusCode']);}
+function latency(o){return num(o,['latency_ms','duration_ms','response_time_ms','latency','duration']);}
+function message(o){return String(o.message||o.msg||o.error||o.event||'Unspecified event');}
+function quantile(arr,q){if(!arr.length)return null;const s=[...arr].sort((a,b)=>a-b),p=(s.length-1)*q,l=Math.floor(p),h=Math.ceil(p);return s[l]+(s[h]-s[l])*(p-l);}
+let lastLogReport=null;
+
+function analyzeLogs(){
+try{
+const logs=parseLogs($('logInput').value);
+if(!logs.length||logs.some(o=>!o||typeof o!=='object'||Array.isArray(o)))throw Error('Each event must be a JSON object.');
+const failed=logs.filter(o=>{const s=status(o);return(s!==null&&s>=400)||/\b(error|fatal|critical)\b/i.test(String(o.level||o.severity||''))||o.error===true;});
+const server=logs.filter(o=>{const s=status(o);return s!==null&&s>=500;});
+const lats=logs.map(latency).filter(x=>x!==null&&x>=0);
+const p95=quantile(lats,.95),p50=quantile(lats,.5),med=quantile(lats,.5);
+const mad=lats.length?quantile(lats.map(x=>Math.abs(x-med)),.5):null;
+const outliers=mad===null?[]:logs.filter(o=>{const l=latency(o);return l!==null&&l>med+Math.max(3*1.4826*mad,med*.5,100);});
+const groups={};failed.forEach(o=>{const k=message(o).replace(/\b\d+\b/g,'#').slice(0,100);groups[k]=(groups[k]||0)+1;});
+const repeated=Object.entries(groups).filter(x=>x[1]>1).sort((a,b)=>b[1]-a[1]);
+$('total').textContent=logs.length;$('failed').textContent=failed.length;
+$('failRate').textContent=(100*failed.length/logs.length).toFixed(1)+'% of events flagged';
+$('fivexx').textContent=server.length;$('p95').textContent=p95===null?'N/A':Math.round(p95)+' ms';
+$('runLabel').textContent='Analyzed';$('patternCount').textContent=(repeated.length+outliers.length+(server.length?1:0))+' signals';
+
+const assessment=[];
+assessment.push(`<div class="finding"><strong><span class="pill ${failed.length?'error':'ok'}">${failed.length?'REVIEW':'CLEAR'}</span> ${failed.length} of ${logs.length} events flagged</strong><p>Flagged by HTTP status or error-level fields. This is a heuristic assessment.</p></div>`);
+if(outliers.length)assessment.push(`<div class="finding"><strong><span class="pill warn">LATENCY</span> ${outliers.length} possible outlier(s)</strong><p>These events exceed the median-based demo threshold.</p></div>`);
+$('assessment').innerHTML=assessment.join('');
+
+const rows=[];
+if(server.length)rows.push(`<tr><td>HTTP 5xx responses</td><td>${server.length}</td><td><span class="pill error">HIGH</span></td></tr>`);
+repeated.slice(0,6).forEach(([k,n])=>rows.push(`<tr><td>${esc(k)}</td><td>${n}</td><td><span class="pill error">REPEATED</span></td></tr>`));
+if(outliers.length)rows.push(`<tr><td>Latency outliers</td><td>${outliers.length}</td><td><span class="pill warn">REVIEW</span></td></tr>`);
+if(!rows.length)rows.push('<tr><td colspan="3">No patterns flagged.</td></tr>');
+$('patterns').innerHTML=rows.join('');
+
+const rec=[];
+if(server.length)rec.push(`<div class="finding"><strong><span class="pill error">HTTP 5xx</span> Inspect server-side failures</strong><p>${server.length} server error(s) found. Check dependency health, timeouts, and upstream availability.</p></div>`);
+if(repeated.length)rec.push(`<div class="finding"><strong><span class="pill error">REPEATED</span> Recurring error signature</strong><p>Most repeated: “${esc(repeated[0][0])}” (${repeated[0][1]} occurrences).</p></div>`);
+if(outliers.length)rec.push(`<div class="finding"><strong><span class="pill warn">LATENCY</span> Review slow events</strong><p>${outliers.length} outlier(s) detected. Check the slowest request and its dependencies.</p></div>`);
+if(lats.length)rec.push(`<div class="finding"><strong><span class="pill ok">METRICS</span> Latency distribution</strong><p>p50: ${Math.round(p50)} ms; p95: ${Math.round(p95)} ms from ${lats.length} numeric latency values.</p></div>`);
+if(!rec.length)rec.push('<div class="finding"><strong>No findings generated</strong><p>Include status and latency fields for richer analysis.</p></div>');
+$('recommendations').innerHTML=rec.join('');
+$('logToast').textContent=`Analysis complete: ${logs.length} events processed locally.`;
+lastLogReport={generated_at:new Date().toISOString(),events:logs.length,failed_events:failed.length,http_5xx:server.length,p50_latency_ms:p50,p95_latency_ms:p95,repeated_patterns:repeated.map(([signature,count])=>({signature,count})),latency_outliers:outliers.map(o=>({service:o.service||'unknown',message:message(o),latency_ms:latency(o)}))};
+}catch(e){$('logToast').textContent=e.message;}
 }
-$("sampleBtn").onclick=loadSample;$("sampleTop").onclick=loadSample;
-$("analyzeBtn").onclick=analyze;$("analyzeTop").onclick=()=>{document.querySelector(".grid").scrollIntoView({behavior:"smooth"});analyze()};
-$("clearBtn").onclick=()=>{$("logInput").value="";$("toast").textContent="Input cleared."};
-$("fileInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{$("logInput").value=await f.text();$("toast").textContent=`Loaded ${f.name}. Click Analyze logs.`}catch{$("toast").textContent="Could not read selected file."}});
-$("downloadInput").onclick=()=>{const blob=new Blob([JSON.stringify(sample,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="sentinel-sample-logs.json";a.click();URL.revokeObjectURL(a.href)};
-loadSample();analyze();
+$('sampleBtn').onclick=loadSample;$('sampleTop').onclick=loadSample;
+$('analyzeBtn').onclick=analyzeLogs;$('analyzeTop').onclick=()=>{analyzeLogs();document.querySelector('.grid').scrollIntoView({behavior:'smooth'});};
+$('clearLogs').onclick=()=>{$('logInput').value='';$('logToast').textContent='Input cleared.';};
+$('logFile').onchange=async e=>{const f=e.target.files[0];if(f){$('logInput').value=await f.text();$('logToast').textContent='File loaded. Click Analyze logs.';}};
+$('downloadSample').onclick=()=>downloadFile('sentinel-sample-logs.json',JSON.stringify(sample,null,2),'application/json');
+function downloadFile(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+</script>
+
+<script>
+const rules=[
+{level:'HIGH',name:'Possible hardcoded secret',re:/\b(?:api[_-]?key|secret|password|token)\s*[:=]\s*["'][^"']{6,}["']/ig,tip:'If this is a real credential, revoke it and use environment variables. Verify that the match is not a harmless example.'},
+{level:'HIGH',name:'Dynamic code evaluation',re:/\beval\s*\(/ig,tip:'Avoid evaluating untrusted strings as code. Prefer safe parsing or explicit logic.'},
+{level:'HIGH',name:'Potential shell invocation with shell enabled',re:/\b(?:exec|execSync|spawn|subprocess\.(?:run|Popen|call))\s*\([^\n]{0,240}(?:shell\s*=\s*True|shell\s*:\s*true)/ig,tip:'Review whether untrusted input can reach a shell command. Prefer argument arrays and strict validation.'},
+{level:'MEDIUM',name:'Potential unsafe HTML insertion',re:/\.innerHTML\s*=|insertAdjacentHTML\s*\(/ig,tip:'Avoid inserting untrusted HTML. Use textContent or safely sanitize and escape content.'},
+{level:'MEDIUM',name:'Broad exception handler',re:/except\s*:/ig,tip:'Catch expected exception types and handle them deliberately.'},
+{level:'MEDIUM',name:'TLS verification disabled',re:/verify\s*=\s*False|rejectUnauthorized\s*:\s*false/ig,tip:'Do not disable TLS certificate verification in production.'},
+{level:'LOW',name:'TODO / FIXME marker',re:/\b(?:TODO|FIXME|XXX)\b/ig,tip:'Check whether this marker indicates unfinished work.'},
+{level:'LOW',name:'NotImplementedError marker',re:/\bNotImplementedError\b/ig,tip:'Confirm whether this is intentional scaffolding or a missing implementation.'}
+];
+let lastCodeReport=null;
+function scanCode(){
+const src=$('sourceInput').value;
+if(!src.trim()){$('codeToast').textContent='Paste or upload code first.';return;}
+const lines=src.split(/\r?\n/),results=[];
+for(const r of rules){r.re.lastIndex=0;let m;while((m=r.re.exec(src))!==null){const line=src.slice(0,m.index).split('\n').length;results.push({severity:r.level,rule:r.name,line,snippet:(lines[line-1]||'').trim().slice(0,200),recommendation:r.tip});if(!m[0].length)r.re.lastIndex++;}}
+const high=results.filter(x=>x.severity==='HIGH').length,medium=results.filter(x=>x.severity==='MEDIUM').length,low=results.filter(x=>x.severity==='LOW').length;
+$('highCount').textContent=high;$('mediumCount').textContent=medium;$('lowCount').textContent=low;
+if(!results.length){$('codeResults').innerHTML='<div class="finding"><strong><span class="pill ok">NO MATCHES</span> No configured patterns detected</strong><p>This does not prove the code is bug-free. Use tests, a linter, dependency checks and manual review.</p></div>';}
+else{$('codeResults').innerHTML=results.slice(0,100).map(r=>`<div class="finding"><strong><span class="pill ${r.severity==='HIGH'?'error':r.severity==='MEDIUM'?'warn':'ok'}">${r.severity}</span> ${esc(r.rule)} <span class="small">· line ${r.line}</span></strong><p><code>${esc(r.snippet)}</code></p><p style="margin-top:5px">${esc(r.recommendation)}</p></div>`).join('')+(results.length>100?'<p class="hint">Showing first 100 findings.</p>':'');}
+lastCodeReport={generated_at:new Date().toISOString(),file:$('sourceFile').files[0]?.name||'pasted-code',summary:{high,medium,low},findings:results,limitations:'Heuristic pattern scan only. False positives are possible; absence of findings does not establish that code is secure or bug-free.'};
+$('codeToast').textContent=`Scan complete: ${results.length} potential finding(s). Review each manually.`;
+}
+$('scanCode').onclick=scanCode;
+$('clearSource').onclick=()=>{$('sourceInput').value='';$('sourceFile').value='';$('codeResults').innerHTML='<div class="empty">Paste code and run the scanner.</div>';$('highCount').textContent='0';$('mediumCount').textContent='0';$('lowCount').textContent='0';$('codeToast').textContent='';lastCodeReport=null;};
+$('sourceFile').onchange=async e=>{const f=e.target.files[0];if(f){$('sourceInput').value=await f.text();$('codeToast').textContent='Source file loaded. Click Scan for bugs.';}};
+$('downloadReport').onclick=()=>{if(!lastCodeReport){$('codeToast').textContent='Run a code scan before downloading a report.';return;}downloadFile('sentinel-code-scan-report.json',JSON.stringify(lastCodeReport,null,2),'application/json');};
+loadSample();analyzeLogs();
 </script>
 </body>
 </html>
