@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090c12" />
+  <title>Sentinel AI — Reliability Investigator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span>S</span></div>
+        <div class="brand-copy">
+          <strong>SENTINEL</strong>
+          <span>RELIABILITY INTELLIGENCE</span>
+        </div>
+        <button class="icon-button sidebar-close" id="sidebarClose" aria-label="Close menu">×</button>
+      </div>
+
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">▦</span><span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-page="projects">
+          <span class="nav-icon">▣</span><span>Projects</span>
+          <span class="nav-count">03</span>
+        </button>
+        <button class="nav-item" data-page="scanner">
+          <span class="nav-icon">⌕</span><span>Project scanner</span>
+        </button>
+        <button class="nav-item" data-page="analysis">
+          <span class="nav-icon">⌁</span><span>Analysis</span>
+        </button>
+        <button class="nav-item" data-page="reports">
+          <span class="nav-icon">▤</span><span>Reports</span>
+        </button>
+        <button class="nav-item" data-page="history">
+          <span class="nav-icon">◷</span><span>Scan history</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+      <div class="workspace-label">PREFERENCES</div>
+      <nav class="main-nav">
+        <button class="nav-item" data-page="settings">
+          <span class="nav-icon">⚙</span><span>Settings</span>
+        </button>
+        <button class="nav-item" data-page="about">
+          <span class="nav-icon">ⓘ</span><span>About Sentinel</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="local-status">
+          <span class="status-dot"></span>
+          <div><strong>Local environment</strong><small>Private workspace</small></div>
+        </div>
+        <div class="profile">
+          <div class="avatar">S</div>
+          <div class="profile-copy"><strong>Developer</strong><small>Local workspace</small></div>
+          <span class="profile-menu">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+          <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Dashboard</strong></div>
+        </div>
+        <div class="topbar-right">
+          <div class="environment-pill"><span class="status-dot"></span> LOCAL MODE</div>
+          <button class="icon-button notification-button" aria-label="Notifications">♧</button>
+          <div class="top-avatar">S</div>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-view active" id="page-dashboard">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">OVERVIEW <span></span> WORKSPACE</div>
+              <h1>Reliability <em>overview.</em></h1>
+              <p class="page-subtitle">A clear view of your application's health and investigation activity.</p>
+            </div>
+            <button class="button button-primary" data-go="scanner"><span>＋</span> New scan</button>
+          </div>
+
+          <div class="welcome-strip">
+            <div class="welcome-copy">
+              <span class="welcome-kicker">SENTINEL INTELLIGENCE</span>
+              <h2>Understand your code.<br><em>Build with confidence.</em></h2>
+              <p>Investigate reliability signals across your local Python projects.</p>
+              <button class="text-button" data-go="scanner">Start an investigation <span>→</span></button>
+            </div>
+            <div class="welcome-graphic" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="orbit orbit-three"></div>
+              <div class="core-shield">S</div>
+              <i class="orbit-point point-one"></i>
+              <i class="orbit-point point-two"></i>
+              <i class="orbit-point point-three"></i>
+            </div>
+            <div class="welcome-index">01 <span>/</span> 04</div>
+          </div>
+
+          <div class="section-heading">
+            <div><span class="eyebrow">WORKSPACE METRICS</span><h2>At a glance</h2></div>
+            <span class="muted-note">Illustrative preview data</span>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <div class="metric-top"><span>Registered projects</span><span class="metric-icon">▣</span></div>
+              <div class="metric-value">03</div>
+              <div class="metric-foot"><span class="metric-neutral">Workspace</span><span>Projects tracked</span></div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-top"><span>Completed scans</span><span class="metric-icon">⌕</span></div>
+              <div class="metric-value">18</div>
+              <div class="metric-foot"><span class="metric-positive">+4</span><span>In this preview</span></div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-top"><span>Signals detected</span><span class="metric-icon">⌁</span></div>
+              <div class="metric-value">12</div>
+              <div class="metric-foot"><span class="metric-warning">Review</span><span>Across sample scans</span></div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-top"><span>Reports generated</span><span class="metric-icon">▤</span></div>
+              <div class="metric-value">09</div>
+              <div class="metric-foot"><span class="metric-neutral">Available</span><span>Preview reports</span></div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel health-panel">
+              <div class="panel-heading">
+                <div><span class="eyebrow">RELIABILITY SNAPSHOT</span><h3>Project health</h3></div>
+                <button class="subtle-button" data-go="analysis">View analysis ↗</button>
+              </div>
+              <div class="health-content">
+                <div class="health-ring"><div><strong>86</strong><span>HEALTH INDEX</span></div></div>
+                <div class="health-legend">
+                  <div><span class="legend-dot gold"></span><span>Healthy signals</span><strong>24</strong></div>
+                  <div><span class="legend-dot amber"></span><span>Needs review</span><strong>08</strong></div>
+                  <div><span class="legend-dot red"></span><span>Critical signals</span><strong>02</strong></div>
+                  <p>Illustrative score only. Real scoring will be calculated by the analysis engine after integration.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel activity-panel">
+              <div class="panel-heading">
+                <div><span class="eyebrow">LATEST EVENTS</span><h3>Recent activity</h3></div>
+                <button class="subtle-button" data-go="history">View all ↗</button>
+              </div>
+              <div class="activity-list">
+                <div class="activity-item"><span class="activity-symbol scan">⌕</span><div><strong>Sample project scan</strong><small>Preview event · Python project</small></div><time>Today</time></div>
+                <div class="activity-item"><span class="activity-symbol report">▤</span><div><strong>Report preview created</strong><small>Illustrative report record</small></div><time>Yesterday</time></div>
+                <div class="activity-item"><span class="activity-symbol project">▣</span><div><strong>Workspace initialized</strong><small>Local environment</small></div><time>Earlier</time></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="section-heading lower-heading">
+            <div><span class="eyebrow">YOUR WORKSPACE</span><h2>Tracked projects</h2></div>
+            <button class="subtle-button" data-go="projects">All projects ↗</button>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <div class="project-card-top"><div class="project-symbol">PY</div><span class="tag tag-good">Preview</span></div>
+              <h3>Sample API Service</h3><p>Python · Backend service</p>
+              <div class="project-card-bottom"><span>Last scan: Not connected</span><button data-go="scanner">Inspect →</button></div>
+            </article>
+            <article class="project-card">
+              <div class="project-card-top"><div class="project-symbol">PY</div><span class="tag tag-neutral">Preview</span></div>
+              <h3>Data Processing</h3><p>Python · Processing toolkit</p>
+              <div class="project-card-bottom"><span>Last scan: Not connected</span><button data-go="scanner">Inspect →</button></div>
+            </article>
+            <article class="project-card add-project-card" data-go="scanner">
+              <div class="add-project-icon">＋</div><h3>Analyze a project</h3><p>Choose a local Python project to begin.</p>
+              <span class="add-project-link">Open project scanner →</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-projects">
+          <div class="page-heading">
+            <div><div class="eyebrow">WORKSPACE <span></span> PROJECTS</div><h1>Your <em>projects.</em></h1><p class="page-subtitle">Manage the Python repositories you want to investigate.</p></div>
+            <button class="button button-primary" data-go="scanner">＋ Add project</button>
+          </div>
+          <div class="toolbar"><div class="search-box"><span>⌕</span><input id="projectSearch" type="search" placeholder="Search projects..." /></div><span class="muted-note">Local workspace</span></div>
+          <div class="project-list" id="projectList">
+            <article class="project-row" data-search="sample api service python backend">
+              <div class="project-symbol">PY</div><div class="project-info"><h3>Sample API Service</h3><p>Python · Backend service · Preview entry</p></div><span class="tag tag-neutral">Not scanned</span><button class="button button-outline small" data-go="scanner">Scan project</button>
+            </article>
+            <article class="project-row" data-search="data processing python toolkit">
+              <div class="project-symbol">PY</div><div class="project-info"><h3>Data Processing</h3><p>Python · Processing toolkit · Preview entry</p></div><span class="tag tag-neutral">Not scanned</span><button class="button button-outline small" data-go="scanner">Scan project</button>
+            </article>
+          </div>
+          <div class="empty-note">These are illustrative project entries. Add real project discovery after backend integration.</div>
+        </section>
+
+        <section class="page-view" id="page-scanner">
+          <div class="page-heading">
+            <div><div class="eyebrow">INVESTIGATION <span></span> SCANNER</div><h1>Project <em>scanner.</em></h1><p class="page-subtitle">Prepare a local Python repository for reliability analysis.</p></div>
+          </div>
+          <div class="scanner-layout">
+            <article class="panel scanner-panel">
+              <div class="panel-heading"><div><span class="eyebrow">NEW INVESTIGATION</span><h3>Select a project</h3></div><span class="step-label">STEP 01 / 02</span></div>
+              <div class="drop-zone" id="dropZone">
+                <div class="upload-icon">↥</div>
+                <h3>Choose a project folder</h3>
+                <p>Select a Python project directory in the connected application.</p>
+                <button class="button button-outline" id="chooseFolder">Choose folder</button>
+                <small>Folder selection requires the local application backend.</small>
+              </div>
+              <div class="selected-project" id="selectedProject">
+                <span class="selected-icon">▣</span><div><strong id="selectedProjectName">No project selected</strong><small id="selectedProjectPath">Choose a folder to continue</small></div><span class="tag tag-neutral">Waiting</span>
+              </div>
+              <div class="scan-options">
+                <div class="panel-heading"><div><span class="eyebrow">ANALYSIS OPTIONS</span><h3>Scan configuration</h3></div></div>
+                <label class="option-row"><span><strong>Static code inspection</strong><small>Inspect Python source without executing it.</small></span><input type="checkbox" checked disabled></label>
+                <label class="option-row"><span><strong>Import dependency mapping</strong><small>Identify local module relationships.</small></span><input type="checkbox" checked disabled></label>
+                <label class="option-row"><span><strong>Reliability signals</strong><small>Check configured code patterns.</small></span><input type="checkbox" checked disabled></label>
+                <label class="option-row"><span><strong>Test discovery</strong><small>Identify candidate test files.</small></span><input type="checkbox" checked disabled></label>
+              </div>
+              <div class="scanner-actions"><span class="muted-note">Backend connection pending</span><button class="button button-primary" id="startScan">Start analysis <span>→</span></button></div>
+            </article>
+            <aside class="panel scanner-aside">
+              <span class="eyebrow">HOW IT WORKS</span><h3>From source to insight.</h3>
+              <div class="process-list">
+                <div><span>01</span><section><strong>Select repository</strong><p>Choose a local Python project.</p></section></div>
+                <div><span>02</span><section><strong>Inspect source</strong><p>Analyze supported source files.</p></section></div>
+                <div><span>03</span><section><strong>Review signals</strong><p>Explore findings and evidence.</p></section></div>
+                <div><span>04</span><section><strong>Export report</strong><p>Keep a record of the investigation.</p></section></div>
+              </div>
+              <div class="privacy-note"><span>◇</span><p><strong>Local-first by design</strong><br>Project source should remain on your machine. The production scanner will not execute scanned repository code.</p></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-analysis">
+          <div class="page-heading"><div><div class="eyebrow">INVESTIGATION <span></span> ANALYSIS</div><h1>Analysis <em>center.</em></h1><p class="page-subtitle">Review reliability findings, dependencies and investigation evidence.</p></div><span class="tag tag-neutral">Awaiting backend</span></div>
+          <div class="notice-banner"><span>i</span><div><strong>No live analysis available yet</strong><p>Connect the Python analysis engine to populate this screen with real findings. The figures below are illustrative placeholders.</p></div></div>
+          <div class="metric-grid compact-metrics">
+            <article class="metric-card"><div class="metric-top"><span>Critical findings</span><span class="metric-icon">!</span></div><div class="metric-value">—</div><div class="metric-foot">Awaiting scan data</div></article>
+            <article class="metric-card"><div class="metric-top"><span>Warnings</span><span class="metric-icon">⌁</span></div><div class="metric-value">—</div><div class="metric-foot">Awaiting scan data</div></article>
+            <article class="metric-card"><div class="metric-top"><span>Files analyzed</span><span class="metric-icon">▤</span></div><div class="metric-value">—</div><div class="metric-foot">Awaiting scan data</div></article>
+            <article class="metric-card"><div class="metric-top"><span>Test candidates</span><span class="metric-icon">✓</span></div><div class="metric-value">—</div><div class="metric-foot">Awaiting scan data</div></article>
+          </div>
+          <div class="panel empty-state-panel"><div class="empty-state-icon">⌁</div><h3>Analysis results will appear here</h3><p>Run a project scan after the Python backend is connected to inspect findings and supporting evidence.</p><button class="button button-primary" data-go="scanner">Go to scanner →</button></div>
+        </section>
+
+        <section class="page-view" id="page-reports">
+          <div class="page-heading"><div><div class="eyebrow">INVESTIGATION <span></span> REPORTS</div><h1>Saved <em>reports.</em></h1><p class="page-subtitle">Review and export records from completed investigations.</p></div></div>
+          <div class="toolbar"><div class="search-box"><span>⌕</span><input id="reportSearch" type="search" placeholder="Search reports..." /></div><span class="muted-note">No live reports yet</span></div>
+          <div class="panel table-panel"><div class="table-head"><span>REPORT</span><span>PROJECT</span><span>DATE</span><span>STATUS</span><span></span></div><div class="table-empty"><div class="empty-state-icon">▤</div><h3>No reports generated</h3><p>Reports created by the connected analysis engine will be listed here.</p><button class="button button-outline" data-go="scanner">Start a scan</button></div></div>
+        </section>
+
+        <section class="page-view" id="page-history">
+          <div class="page-heading"><div><div class="eyebrow">WORKSPACE <span></span> HISTORY</div><h1>Scan <em>history.</em></h1><p class="page-subtitle">A timeline of your previous project investigations.</p></div></div>
+          <div class="panel table-panel"><div class="table-head"><span>INVESTIGATION</span><span>PROJECT</span><span>DATE</span><span>RESULT</span></div><div class="table-empty"><div class="empty-state-icon">◷</div><h3>Your history starts here</h3><p>Completed scans will be saved locally and displayed in this timeline.</p><button class="button button-primary" data-go="scanner">Start first scan</button></div></div>
+        </section>
+
+        <section class="page-view" id="page-settings">
+          <div class="page-heading"><div><div class="eyebrow">PREFERENCES <span></span> CONFIGURATION</div><h1>Workspace <em>settings.</em></h1><p class="page-subtitle">Configure the local Sentinel experience.</p></div></div>
+          <div class="settings-layout">
+            <article class="panel settings-panel"><span class="eyebrow">GENERAL</span><h3>Application preferences</h3>
+              <div class="setting-row"><div><strong>Application name</strong><small>Workspace identity</small></div><span class="setting-value">Sentinel AI</span></div>
+              <div class="setting-row"><div><strong>Environment</strong><small>Where analysis is intended to run</small></div><span class="setting-value">Local</span></div>
+              <div class="setting-row"><div><strong>Theme</strong><small>Interface appearance</small></div><span class="setting-value">Dark</span></div>
+            </article>
+            <article class="panel settings-panel"><span class="eyebrow">PRIVACY & SECURITY</span><h3>Local-first controls</h3>
+              <div class="setting-row"><div><strong>External AI services</strong><small>No external AI API configured</small></div><span class="tag tag-good">Disabled</span></div>
+              <div class="setting-row"><div><strong>Source execution</strong><small>Scanned project code should not be executed</small></div><span class="tag tag-good">Restricted</span></div>
+              <div class="setting-row"><div><strong>Data storage</strong><small>Intended local storage</small></div><span class="setting-value">SQLite</span></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-about">
+          <div class="page-heading"><div><div class="eyebrow">SENTINEL <span></span> PRODUCT</div><h1>Built for <em>clarity.</em></h1><p class="page-subtitle">A local-first toolkit for investigating Python application reliability.</p></div></div>
+          <div class="about-hero panel"><div class="about-mark">S</div><span class="eyebrow">RELIABILITY INVESTIGATOR</span><h2>Sentinel AI</h2><p>Understand application signals, trace potential reliability issues and produce evidence-backed investigation reports — without depending on a paid AI API.</p><div class="about-links"><a href="https://github.com/ContentbyShanu/sentinel-ai-reliability" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a><span>Local-first Python toolkit</span></div></div>
+          <div class="about-foot-grid"><article class="panel"><span class="eyebrow">PRINCIPLE 01</span><h3>Evidence over guesswork</h3><p>Findings should be traceable to source evidence and explainable rules.</p></article><article class="panel"><span class="eyebrow">PRINCIPLE 02</span><h3>Local by default</h3><p>Keep project analysis within the local development environment.</p></article><article class="panel"><span class="eyebrow">PRINCIPLE 03</span><h3>Developer focused</h3><p>Present useful information without hiding the technical details.</p></article></div>
+        </section>
+
+        <footer class="footer"><span>© 2026 SENTINEL AI</span><span>RELIABILITY INVESTIGATOR <i></i> LOCAL-FIRST TOOLKIT</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
