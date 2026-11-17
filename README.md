@@ -1,87 +1,117 @@
- Sentinel AI — Reliability Workspace
+◈ SENTINEL AI
 
-A Modern Workspace for Software Reliability Management
+SOFTWARE RELIABILITY WORKSPACE
 
-Live Application: "Launch Sentinel AI" (https://contentbyshanu.github.io/sentinel-ai-reliability/)
+<p align="center">
+  <strong>A centralized workspace for project organization, workflow monitoring, reporting and reliability analytics.</strong>
+</p><p align="center">
+  <a href="https://contentbyshanu.github.io/sentinel-ai-reliability/">
+    <img src="https://img.shields.io/badge/LAUNCH%20LIVE%20APP-Open%20Sentinel%20AI-C6A15B?style=for-the-badge&logo=googlechrome&logoColor=111111" alt="Launch Sentinel AI">
+  </a>
+  <a href="https://github.com/ContentbyShanu/sentinel-ai-reliability">
+    <img src="https://img.shields.io/badge/SOURCE%20CODE-GitHub-24292F?style=for-the-badge&logo=github&logoColor=white" alt="Source Code">
+  </a>
+</p><p align="center">
+  <img src="https://img.shields.io/badge/HTML5-Structure-E34F26?style=flat-square&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-Interface-1572B6?style=flat-square&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-Interactions-F7DF1E?style=flat-square&logo=javascript&logoColor=111111">
+  <img src="https://img.shields.io/badge/Python-Future%20Backend-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/Deployment-GitHub%20Pages-222222?style=flat-square&logo=githubpages&logoColor=white">
+</p>---
 
-GitHub Repository: "View Source Code" (https://github.com/ContentbyShanu/sentinel-ai-reliability)
+01 — Project Overview
+
+Sentinel AI is a software reliability workspace designed to bring project management, scanning workflow previews, activity tracking, reporting and analytics into one organized application.
+
+Instead of spreading essential workspace activities across separate interfaces, Sentinel AI provides a centralized environment with dedicated sections and interactive functionality.
+
+The project focuses on building a structured, user-friendly foundation for a future Python-powered software reliability platform.
+
+«One workspace. Multiple workflows. A clearer view of software reliability.»
 
 ---
 
-Overview
+02 — Live Application
 
-Sentinel AI is a software reliability workspace designed to bring essential project management, workflow monitoring, activity tracking, reporting, and analytics into one organized interface.
+<p align="center">
+  <a href="https://contentbyshanu.github.io/sentinel-ai-reliability/">
+    <img src="https://img.shields.io/badge/▶%20OPEN%20SENTINEL%20AI-LIVE%20APPLICATION-C6A15B?style=for-the-badge&logoColor=111111" alt="Open Live Application">
+  </a>
+</p>Deployment: GitHub Pages
+Application URL: https://contentbyshanu.github.io/sentinel-ai-reliability/
 
-It provides a centralized environment where users can manage projects, explore scanning workflows, review activity history, and understand project-related information through a structured dashboard.
-
-The project focuses on a clean user experience, practical functionality, modular frontend architecture, and a security-conscious design approach.
+The live deployment hosts the Sentinel AI frontend application.
 
 ---
 
-Key Features
+03 — Core Capabilities
 
-1. Dashboard
+◈ Dashboard
 
-- Centralized workspace overview.
+A centralized overview of the workspace.
+
 - Organized dashboard layout.
-- Quick access to important sections.
-- Visual presentation of project activity and workspace information.
+- Quick access to application sections.
+- Visual presentation of workspace information.
+- Structured navigation.
 
-2. Project Management
+◈ Project Management
 
-- Dedicated projects section.
-- Organized project information.
-- Project-focused workspace navigation.
-- Clear separation of project-related activities.
+A dedicated environment for organizing project information.
 
-3. Scanner Workflow
+- Project workspace.
+- Organized project records.
+- Project-focused navigation.
+- Separation of project activities.
 
-- Dedicated scanner interface.
-- Interactive scanning workflow preview.
-- Structured workflow steps.
-- Organized presentation of scan-related information.
+◈ Scanner Workflow
 
-Current implementation note: The scanner currently demonstrates the frontend workflow and interface. Actual Python-based source-code inspection and vulnerability detection are not yet implemented.
+An interactive interface for exploring scan-related workflows.
 
-4. Activity History
+- Dedicated scanner section.
+- Workflow preview.
+- Structured scan-related interface.
+- Organized presentation of workflow information.
 
-- Dedicated history section.
-- Organized activity records.
-- Easy navigation through previous workspace activity.
+Implementation status: The current scanner is a frontend workflow preview. Actual Python-based source-code inspection and vulnerability detection are planned for future development.
 
-5. Reports
+◈ Activity History
 
-- Dedicated reporting interface.
-- Structured presentation of report information.
-- CSV export functionality for supported report data.
+A dedicated area for reviewing workspace activity.
 
-6. Analytics
+- Organized activity history.
+- Accessible activity records.
+- Structured information presentation.
 
-- Visual analytics dashboard.
-- Reliability-related chart presentation.
-- Organized information for easier interpretation.
+◈ Reports & Export
 
-7. Security & Settings
+Reporting functionality for organizing and exporting supported information.
 
-- Dedicated security and settings interface.
-- Organized configuration experience.
-- Security-conscious design considerations.
+- Dedicated reports section.
+- Structured report presentation.
+- CSV export functionality.
+
+◈ Analytics
+
+A visual environment for understanding workspace information.
+
+- Analytics dashboard.
+- Chart-based presentation.
+- Reliability-related visual information.
+
+◈ Security & Settings
+
+A dedicated section for application settings and security-related interface elements.
+
+- Organized settings interface.
+- Security-conscious development direction.
+- Structured configuration experience.
 
 ---
 
-Technology Stack
+04 — Application Architecture
 
-Technology| Purpose
-HTML5| Application structure
-CSS3| Styling and responsive interface
-JavaScript| Frontend interactions and functionality
-Python| Intended backend development direction
-Git & GitHub| Version control and project hosting
-GitHub Pages| Live frontend deployment
-
----
-
-Project Structure
+Sentinel AI follows a modular frontend structure that separates application markup, styling and interaction logic.
 
 sentinel-ai-reliability/
 │
@@ -101,131 +131,116 @@ sentinel-ai-reliability/
 ├── README.md
 └── poetry.lock
 
+Component| Responsibility
+"index.html"| Application structure
+"style.css"| Interface styling and layout
+"app.js"| Frontend interactions and application behavior
+"deploy.yml"| GitHub Pages deployment workflow
+"README.md"| Project documentation
+
 ---
 
-Getting Started
+05 — Technology Stack
 
-You can access the application directly through the live link:
+Technology| Application
+HTML5| Structural foundation
+CSS3| Visual design and layouts
+JavaScript| Interactive frontend functionality
+Python| Planned backend and analysis engine
+Git| Version control
+GitHub| Source code management
+GitHub Actions| Automated deployment
+GitHub Pages| Public application hosting
 
-"Open Sentinel AI" (https://contentbyshanu.github.io/sentinel-ai-reliability/)
+---
 
-To explore the source code locally:
+06 — Getting Started
 
-1. Clone the repository
+Access the Live Application
+
+The easiest way to explore Sentinel AI is through its deployed application:
+
+"Launch Sentinel AI →" (https://contentbyshanu.github.io/sentinel-ai-reliability/)
+
+Run Locally
+
+Step 1 — Clone the repository
 
 git clone https://github.com/ContentbyShanu/sentinel-ai-reliability.git
 
-2. Open the project directory
+Step 2 — Navigate into the project
 
 cd sentinel-ai-reliability
 
-3. Run the frontend
-
-Open "frontend/index.html" in your browser.
-
-Alternatively, run a local development server from the repository root:
+Step 3 — Start a local server
 
 python -m http.server 8000 --directory frontend
 
-Then visit:
+Step 4 — Open in your browser
 
 http://localhost:8000
 
 ---
 
-Design & User Experience
+07 — Security & Engineering Principles
 
-Sentinel AI uses a structured workspace interface designed to keep information accessible and easy to navigate.
+Security is an important part of Sentinel AI's development direction.
 
-The interface emphasizes:
+The project is designed around the following principles:
 
-- Clean and organized dashboard layouts.
-- Consistent navigation.
-- Clear information hierarchy.
-- Interactive interface elements.
-- Dedicated sections for different workspace activities.
-- Readable charts and reporting layouts.
+- Modular application organization.
+- Clear separation of frontend responsibilities.
+- Security-conscious implementation.
+- Transparent reporting of implemented functionality.
+- A foundation for future backend validation and analysis.
 
-The objective is to make software reliability-related workflows easier to explore through one unified interface.
-
----
-
-Security Approach
-
-Security is an important consideration in the project's design direction.
-
-The project emphasizes:
-
-- Clear separation of application components.
-- Organized frontend architecture.
-- Security-conscious development practices.
-- Avoiding unsupported claims about scan results.
-- A foundation for future backend validation and source-code analysis.
-
-Note: The current frontend does not perform real vulnerability scans or provide production security guarantees.
+Current limitation: The deployed frontend does not currently perform real source-code security scans. No production security guarantees or vulnerability-detection capabilities are claimed.
 
 ---
 
-Current Development Status
+08 — Development Roadmap
 
-Sentinel AI currently provides a working frontend workspace with interactive sections and a publicly accessible deployment.
+The current release establishes the interactive frontend workspace. Future development will focus on expanding its actual analysis capabilities.
 
-Component| Status
-Dashboard interface| Implemented
-Project workspace| Implemented
-Scanner workflow preview| Implemented
-Activity history| Implemented
-Reports interface| Implemented
-CSV export| Implemented
-Analytics interface| Implemented
-Security & settings interface| Implemented
-Python scanning engine| Planned
+Planned Improvement| Status
+Python source-code inspection| Planned
+Reliability analysis engine| Planned
+Vulnerability detection| Planned
 Backend integration| Planned
+Persistent project records| Planned
+Detailed scan reports| Planned
+Advanced analytics| Planned
 
 ---
 
-Future Roadmap
+09 — Project Objectives
 
-Planned development areas include:
+Sentinel AI demonstrates practical development work across:
 
-- Python-based source-code inspection.
-- Actual reliability and vulnerability analysis.
-- Backend integration.
-- Persistent project and scan records.
-- More detailed reporting capabilities.
-- Advanced analytics and monitoring.
-- Expanded security validation.
+- Application structure and architecture.
+- Interactive frontend development.
+- Modular code organization.
+- Dashboard and reporting interfaces.
+- CSV data export.
+- Automated deployment using GitHub Actions.
+- Software reliability workflow design.
 
-These improvements aim to evolve Sentinel AI from a frontend workspace into a more complete software reliability platform.
-
----
-
-Project Goals
-
-Sentinel AI was developed as a practical software project focused on:
-
-- Building a structured application interface.
-- Organizing multiple workflows in one workspace.
-- Creating reusable frontend components and functionality.
-- Exploring software reliability and security workflows.
-- Establishing a foundation for future Python backend development.
+The long-term objective is to develop Sentinel AI into a more complete software reliability platform backed by Python-based analysis capabilities.
 
 ---
 
-Author
+10 — Author
 
 Shanu Kumar
 
-GitHub: "@ContentbyShanu" (https://github.com/ContentbyShanu)
-
-Portfolio: "View Portfolio" (https://halcyon-universe.lovable.app/)
-
----
-
-License
-
-This project is available for learning, exploration, and development purposes. A formal open-source license can be added when selected.
+- GitHub: "ContentbyShanu" (https://github.com/ContentbyShanu)
+- Portfolio: "View Portfolio" (https://halcyon-universe.lovable.app/)
+- Project Repository: "Sentinel AI — GitHub" (https://github.com/ContentbyShanu/sentinel-ai-reliability)
 
 ---
 
-Sentinel AI — A workspace built around software reliability, structured workflows, and continuous improvement.
+<p align="center">
+  <strong>SENTINEL AI</strong>
+  <br>
+  <em>Built for structured workflows. Designed for reliability.</em>
+</p>
